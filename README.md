@@ -23,3 +23,4 @@ To simplify home exercise prescription and improve rehabilitation adherence.
 - Video-supported exercises
 - AI-based exercise recommendations
 - Mobile application
+ https://aylin-baykal.github.io/rehabflow/
