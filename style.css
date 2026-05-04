@@ -1,27 +1,122 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap');
+
 body {
-    font-family: Arial;
-    background: #eef2f7;
-    text-align: center;
+  margin: 0;
+  font-family: "Inter", sans-serif;
+  background: linear-gradient(135deg, #eef2f7, #f7f9fc);
+  color: #1f2a37;
 }
 
+/* ANA CONTAINER */
 .container {
-    margin-top: 60px;
+  max-width: 950px;
+  margin: auto;
+  padding: 50px 20px;
+  text-align: center;
 }
 
+/* BAŞLIK */
+h1 {
+  font-size: 42px;
+  font-weight: 700;
+  color: #3b82f6;
+  letter-spacing: -0.5px;
+  margin-bottom: 10px;
+}
+
+h2 {
+  font-size: 24px;
+  font-weight: 600;
+  color: #111827;
+  margin-top: 20px;
+}
+
+/* PARAGRAF */
+p {
+  color: #6b7280;
+  font-size: 16px;
+}
+
+/* BUTONLAR */
 button {
-    padding: 12px;
-    margin: 8px;
-    border: none;
-    border-radius: 8px;
-    background: #2d6cdf;
-    color: white;
-    cursor: pointer;
+  display: inline-block;
+  padding: 14px 18px;
+  margin: 10px;
+  border: none;
+  border-radius: 14px;
+
+  background: #ffffff;
+  color: #1f2a37;
+
+  font-size: 15px;
+  font-weight: 500;
+
+  cursor: pointer;
+
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+
+  transition: all 0.25s ease;
 }
 
+/* HOVER EFFECT */
+button:hover {
+  background: linear-gradient(135deg, #3b82f6, #6366f1);
+  color: white;
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 15px 30px rgba(59, 130, 246, 0.3);
+}
+
+/* AKTİF KART / METİN ALANI */
 .card {
-    background: white;
-    padding: 20px;
-    margin: 20px auto;
-    width: 320px;
-    border-radius: 10px;
+  background: white;
+  padding: 25px;
+  margin: 25px auto;
+  width: 90%;
+  max-width: 700px;
+  border-radius: 18px;
+
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+
+  text-align: left;
+  animation: fadeIn 0.4s ease-in-out;
+}
+
+/* EGZERSİZ METNİ */
+.text {
+  white-space: pre-wrap;
+  font-size: 14px;
+  line-height: 1.6;
+  color: #374151;
+}
+
+/* SOFT ANİMASYON */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* BUTON GRUPLARI DAHA DÜZENLİ */
+.container button {
+  min-width: 180px;
+}
+
+/* MOBİL UYUMLU */
+@media (max-width: 600px) {
+  h1 {
+    font-size: 32px;
+  }
+
+  button {
+    width: 90%;
+  }
+
+  .card {
+    width: 95%;
+  }
 }
