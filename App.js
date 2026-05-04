@@ -1,97 +1,107 @@
 import { useState } from "react";
 import "./App.css";
 
-/**
- * REHABFLOW CORE DATA STRUCTURE
- * (Şimdilik genişletilebilir iskelet)
- */
-const rehabData = {
+const data = {
   "Üst Ekstremite": {
-    "Lenfödem (Kol)": {
-      title: "Lenfödem Kol Egzersizleri",
-      content: `Lenfödem kol egzersizleri:
+    "Lenfödem (Kol)": `
+Lenfödem Kol Egzersizleri
 
-• Sırtüstü yatışta kolu 90° kaldır
+• Sırtüstü yatışta kolu kaldır
 • El bileği fleksiyon / ekstansiyon
 • Parmak aç-kapa
-• Omuz abduksiyon-adduksiyon
+• Omuz mobilizasyonu
+• Lenf drenajı destek hareketleri
+`,
 
-(Tüm broşür içeriği burada genişletilecek)`
-    },
+    "Omuz Problemleri": `
+Omuz Rehabilitasyonu
 
-    "Omuz Ağrıları": {
-      title: "Omuz Rehabilitasyonu",
-      content: `• Pendulum egzersizleri
+• Pendulum egzersizleri
+• Duvar yürütme
 • Dış rotasyon
-• İç rotasyon
-• Duvar tırmanma`
-    }
+• Scapula stabilizasyon
+`
   },
 
   "Alt Ekstremite": {
-    "Ön Çapraz Bağ (ACL)": {
-      title: "ACL Ameliyatı Sonrası",
-      content: `• Quad set
+    "Ön Çapraz Bağ (ACL)": `
+ACL Rehabilitasyonu
+
+• Quadriceps set
 • Straight leg raise
 • Heel slide
-• Mini squat (ileri dönem)`
-    },
+• Kontrollü squat
+`,
 
-    "Menisküs Yaralanması": {
-      title: "Menisküs Rehabilitasyonu",
-      content: `• Diz ROM egzersizleri
-• İzometrik quadriceps
-• Düşük yük kontrollü squat`
-    },
+    "Menisküs": `
+Menisküs Rehabilitasyonu
 
-    "Diz Osteoartriti": {
-      title: "Diz Osteoartriti",
-      content: `• Low impact egzersizler
+• ROM egzersizleri
+• İzometrik kas aktivasyonu
+• Düşük yük egzersizleri
+`,
+
+    "Diz Osteoartriti": `
+Diz Osteoartriti
+
 • Bisiklet
-• Quadriceps güçlendirme`
-    }
+• Quadriceps güçlendirme
+• Düşük impact yürüyüş
+`
   },
 
   "Omurga": {
-    "Boyun Ağrısı": {
-      title: "Servikal Rehabilitasyon",
-      content: `• Chin tuck
-• Boyun germe
-• Postür düzeltme`
-    },
+    "Boyun Ağrısı": `
+Servikal Rehabilitasyon
 
-    "Bel Ağrısı": {
-      title: "Lomber Rehabilitasyon",
-      content: `• Pelvic tilt
+• Chin tuck
+• Boyun germe
+• Postür düzeltme
+`,
+
+    "Bel Ağrısı": `
+Lomber Rehabilitasyon
+
+• Pelvic tilt
+• Core stabilizasyon
 • McKenzie extension
-• Core stabilizasyon`
-    }
+`
   },
 
-  "Genel": {
-    "Kardiyak Rehabilitasyon": {
-      title: "Kardiyak Rehab",
-      content: `• Nefes egzersizleri
+  "Genel Rehabilitasyon": {
+    "Kardiyak Rehabilitasyon": `
+• Solunum egzersizleri
 • Yavaş yürüyüş
-• Postür egzersizleri`
-    },
+• Postür egzersizleri
+`,
 
-    "Ofis Ergonomisi": {
-      title: "Ergonomi",
-      content: `• Monitor eye level
+    "Ofis Ergonomisi": `
 • 90 derece oturuş
-• Saatlik mola`
-    }
+• Monitor eye level
+• Saatlik mola
+`
   }
 };
 
 export default function App() {
+  const [step, setStep] = useState("region");
   const [region, setRegion] = useState(null);
   const [disease, setDisease] = useState(null);
 
   const reset = () => {
     setRegion(null);
     setDisease(null);
+    setStep("region");
+  };
+
+  const selectRegion = (r) => {
+    setRegion(r);
+    setStep("disease");
+  };
+
+  const selectDisease = (d) => {
+    setDisease(d);
+    setStep("content");
   };
 
   return (
@@ -100,47 +110,49 @@ export default function App() {
       <h1>RehabFlow</h1>
       <p>Fizyoterapi Egzersiz Sistemi</p>
 
-      {/* BÖLGE SEÇİMİ */}
-      {!region && (
-        <div>
+      {/* BÖLGE */}
+      {step === "region" && (
+        <>
           <h2>Bölge Seç</h2>
 
-          {Object.keys(rehabData).map((r) => (
-            <button key={r} onClick={() => setRegion(r)}>
+          {Object.keys(data).map((r) => (
+            <button key={r} onClick={() => selectRegion(r)}>
               {r}
             </button>
           ))}
-        </div>
+        </>
       )}
 
-      {/* HASTALIK SEÇİMİ */}
-      {region && !disease && (
-        <div>
+      {/* HASTALIK */}
+      {step === "disease" && (
+        <>
           <h2>{region}</h2>
 
-          {Object.keys(rehabData[region]).map((d) => (
-            <button key={d} onClick={() => setDisease(d)}>
+          {Object.keys(data[region]).map((d) => (
+            <button key={d} onClick={() => selectDisease(d)}>
               {d}
             </button>
           ))}
 
           <button onClick={reset}>Geri</button>
-        </div>
+        </>
       )}
 
-      {/* EGZERSİZ */}
-      {region && disease && (
-        <div>
-          <h2>{rehabData[region][disease].title}</h2>
+      {/* İÇERİK */}
+      {step === "content" && (
+        <>
+          <h2>{disease}</h2>
 
           <div className="card">
             <pre className="text">
-              {rehabData[region][disease].content}
+              {data[region][disease]}
             </pre>
           </div>
 
-          <button onClick={() => setDisease(null)}>Geri</button>
-        </div>
+          <button onClick={() => setStep("disease")}>
+            Geri
+          </button>
+        </>
       )}
 
     </div>
