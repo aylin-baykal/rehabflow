@@ -1,0 +1,27 @@
+body {
+    font-family: Arial;
+    background: #eef2f7;
+    text-align: center;
+}
+
+.container {
+    margin-top: 60px;
+}
+
+button {
+    padding: 12px;
+    margin: 8px;
+    border: none;
+    border-radius: 8px;
+    background: #2d6cdf;
+    color: white;
+    cursor: pointer;
+}
+
+.card {
+    background: white;
+    padding: 20px;
+    margin: 20px auto;
+    width: 320px;
+    border-radius: 10px;
+}
